@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # custom user model
-# AUTH_USER_MODEL = 'user_login.CustomUser'
+AUTH_USER_MODEL = 'user_login.MyUser'
 
 # Application definition
 
