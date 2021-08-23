@@ -1,0 +1,62 @@
+{% extends 'navigationbar.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title_block %}
+    Home
+{% endblock title_block %}
+
+{% block body_block %}
+
+
+<div class="row">
+    {% if user.profile.profile_pic %}
+            <div class="col-sm-12 mx-auto text-center pt-4 mt-4">
+                    <div class="tz-gallery">
+                        <a class="lightbox" href="/media/{{ user.profile.profile_pic }}">
+                            <img src="/media/{{ user.profile.profile_pic }}" class="img-fluid mx-auto rounded-squre" alt="Profile picture" style="height: 270px; width: 270px;">
+                        </a>
+                    </div>
+                <li class="" style="list-style: none;"><a href="{% url 'user_login:change_profile_photo' %}" class="btn btn-success"> Change Picture</a></li>
+            </div>
+        
+    {% else %}
+        <div class="col-sm-12 mx-auto text-center pt-4 mt-4">
+            <div class="tz-gallery">
+                <a class="lightbox" href="/media/profile_pics/save_profile.jpg">
+                    <img src="/media/profile_pics/save_profile.jpg" class="img-fluid mx-auto rounded-circle" alt="Profile picture" style="max-height: 200px; max-width: 200px;">
+                </a>
+            </div>
+            <li class="" style="list-style: none;"><a href="{% url 'user_login:change_profile_photo' %}" class="btn btn-success"> Change Picture</a></li>
+        </div>
+    {% endif %}
+
+        <div class="col-sm-12 pt-4 m-auto">
+            <div class="card-body">
+                <h3 class="card-title text-center">{{ user.profile.name }}</h3>
+                <br>
+            {% if user.profile.name or user.profile.address or user.profile.dob%}
+                <ul class="list-group col-sm-12 text-center">
+                    {% if user.profile.name %}
+                        <li class="list-group-item border-bottom-0 text-center">&nbsp;Profile Name : <b>{{ user.profile.name }}</b></li>
+                    {% endif %}
+                    {% if user.profile.address %}
+                        <li class="list-group-item border-bottom-0 text-center">&nbsp; Address : <b>{{ user.profile.address }}</b></li>
+                    {% endif %}
+                    {% if user.profile.dob %}
+                        <li class="list-group-item text-center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth: <b>{{ user.profile.dob }}</b></li>
+                    {% endif %}
+                  </ul>
+            {% endif %}
+            <li class="list-group-item text-center col-sm-12 text-center"><a href="{% url 'user_login:add_profile_info' %}" class="btn btn-success card-link">Edit info</a></li>
+            
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item border-0">{{ user.email }}</li>
+                </ul>
+            </div>
+        </div>
+</div>
+
+
+{% endblock body_block %}

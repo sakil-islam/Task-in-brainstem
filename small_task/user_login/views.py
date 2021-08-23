@@ -54,7 +54,7 @@ def profile_page(request):
 
 @login_required
 def Add_Profile_Info(request):
-    current_user = models.Profile.objects.get(user=request.user)
+    current_user = models.info.objects.get(user=request.user)
     form = forms.UserProfileForm(instance=current_user)
     if request.method == 'POST':
         form = forms.UserProfileForm(
@@ -65,12 +65,12 @@ def Add_Profile_Info(request):
             return HttpResponseRedirect(reverse('user_info:home'))
 
     diction = {'form': form}
-    return render(request, 'user_login/profile_info_set.html', context=diction)
+    return render(request, 'user_login/update_info.html', context=diction)
 
 
 @login_required
 def change_profile_pic(request):
-    current_user = models.Profile.objects.get(user=request.user)
+    current_user = models.info.objects.get(user=request.user)
     form = forms.ProfilePicChange(instance=current_user)
     if request.method == 'POST':
         form = forms.ProfilePicChange(
@@ -81,4 +81,4 @@ def change_profile_pic(request):
             return HttpResponseRedirect(reverse('user_info:home'))
 
     diction = {'form': form}
-    return render(request, 'user_login/profile_info_set.html', context=diction)
+    return render(request, 'user_login/update_info.html', context=diction)
